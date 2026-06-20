@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eko Health — Erin Pan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet"/>
+  <style>
+    @font-face {
+      font-family: "HamIsCute";
+      src: url("assets/fonts/HamIsCute-Regular.otf") format("opentype");
+    }
+    @font-face {
+      font-family: "SFProRounded";
+      src: url("assets/fonts/SF-Pro-Rounded-Light.otf") format("opentype");
+      font-weight: 300;
+    }
+    @font-face {
+      font-family: "SFProRounded";
+      src: url("assets/fonts/SF-Pro-Rounded-Medium.otf") format("opentype");
+      font-weight: 500;
+    }
+
+    :root {
+      --bg: #F4FFE5;
+      --green: #82E600;
+      --green-30: rgba(130,230,0,0.3);
+      --green-100: #82E600;
+      --black-70: rgba(0,0,0,0.7);
+      --black: #000000;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      font-family: "SFProRounded", -apple-system, sans-serif;
+      font-weight: 300;
+      color: var(--black);
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 40px;
+    }
+    .logo { display: flex; flex-direction: column; align-items: center; gap: 2px; text-decoration: none; }
+    .logo img { width: 36px; height: 36px; object-fit: contain; }
+    .logo-name { font-family: "ZCOOL QingKe HuangYou", cursive; font-size: 20px; color: #E9A5D2;}
+    nav { display: flex; align-items: flex-end; gap: 36px; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--black); }
+    .nav-item img { width: 56px; height: 56px; object-fit: contain; mix-blend-mode: multiply; }
+    .nav-item span { font-size: 20px; }
+
+    /* ── MAIN ── */
+    main { padding: 0 60px; max-width: 1100px; margin: 0 auto; }
+
+    /* ── SECTION COMMON ── */
+    .section { padding: 60px 0 40px; }
+    .section-head {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 6px;
+    }
+    .section-head img { width: 56px; height: 56px; object-fit: contain; mix-blend-mode: multiply; }
+    .section-head h2 {
+      font-family: "HamIsCute", cursive; font-size: 40px; font-weight: normal; color: var(--black);
+    }
+    .section-divider {
+      width: 100%; height: 3px;
+      background: var(--green-30);
+      margin-bottom: 36px;
+    }
+
+    /* ── HERO ── */
+    .hero { padding: 40px 0 20px; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--black); margin-bottom: 32px;
+    }
+    .back-btn img { width: 32px; height: 32px; mix-blend-mode: multiply; }
+    .hero-body { display: flex; align-items: center; gap: 48px; }
+    .hero-left { flex: 0 0 340px; }
+    .hero-title { font-family: "HamIsCute", cursive; font-size: 40px; margin-bottom: 12px; }
+    .hero-desc { font-size: 20px; line-height: 1.5; }
+    .hero-right { flex: 1; display: flex; justify-content: center; }
+    .hero-right img { width: 80%; border-radius: 16px; mix-blend-mode: multiply; }
+
+    /* ── OVERVIEW ── */
+    .overview-grid { display: flex; gap: 60px; }
+    .overview-left { flex: 0 0 320px; }
+    .overview-right { flex: 1; }
+    .overview-meta { margin-bottom: 28px; font-size: 18px; line-height: 1.8; }
+    .overview-meta strong { font-weight: 500; }
+    .jump-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border: 2px solid var(--green-30);
+      border-radius: 10px; background: none; cursor: pointer;
+      font-size: 18px; font-family: "SFProRounded", sans-serif; font-weight: 300;
+      color: var(--black); text-decoration: none;
+    }
+    .jump-btn img { width: 20px; height: 20px; mix-blend-mode: multiply; }
+    .overview-right p { font-size: 18px; line-height: 1.65; margin-bottom: 20px; }
+    .overview-right strong { font-weight: 500; }
+
+    /* ── RESEARCH PROCESS ── */
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .process-card { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 12px; }
+    .process-badge {
+      display: flex; align-items: center; gap: 10px;
+      border: 1.5px solid var(--black-70); border-radius: 50px;
+      padding: 8px 16px; width: 100%;
+    }
+    .process-badge-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1.5px solid var(--black-70);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--black-70); flex-shrink: 0;
+      font-weight: 300;
+    }
+    .process-badge-label { font-size: 16px; font-weight: 300; text-align: left; line-height: 1.2; }
+    .process-icons { display: flex; gap: 6px; justify-content: center; align-items: center; flex-wrap: wrap; }
+    .process-icons img { width: 52px; height: 52px; object-fit: contain; mix-blend-mode: multiply; }
+    .process-desc { font-size: 16px; line-height: 1.5; font-weight: 300; color: var(--black); }
+
+    /* Competitive Analysis special grid */
+    .comp-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; width: 100%; margin-top: 4px;
+    }
+    .comp-item {
+      background: var(--green-30); border-radius: 10px;
+      padding: 10px 12px; text-align: left;
+    }
+    .comp-item img { width: 36px; height: 36px; object-fit: contain; mix-blend-mode: multiply; margin-bottom: 4px; display: block; }
+    .comp-name { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+    .comp-bullets { list-style: none; padding: 0; }
+    .comp-bullets li { font-size: 12px; font-weight: 300; line-height: 1.4; display: flex; gap: 5px; }
+    .comp-bullets li::before { content: "○"; flex-shrink: 0; }
+
+    /* ── INITIAL SKETCHES ── */
+    .sketches-grid {
+      display: flex; gap: 16px; align-items: center;
+    }
+    .sketch-img {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--green-30);
+      background: #fff;
+    }
+    .sketch-img img { width: 100%; display: block; }
+    .sketch-tall { flex: 0 0 140px; }
+    .sketches-middle { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .sketch-wide { flex: 0 0 260px; }
+
+    /* ── PHASE CAD CARDS ── */
+    .cad-card {
+      background: var(--green-30); border-radius: 16px;
+      padding: 24px; margin-bottom: 32px; position: relative;
+    }
+    .cad-card-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--green-100);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 500; color: #000;
+    }
+    .cad-card-title { font-size: 18px; font-weight: 500; margin-bottom: 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+    .cad-card-title img { width: 40px; height: 40px; object-fit: contain; }
+    .cad-designs-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .cad-designs-grid-5 {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    }
+    .cad-designs-grid-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .cad-design-item { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+    .cad-design-item img { width: 100%; max-height: 100px; object-fit: contain; }
+    .cad-design-label { font-size: 14px; font-weight: 300; }
+
+    /* ── SUBSECTION BADGE ── */
+    .subsection-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1.5px solid var(--black-70); border-radius: 50px;
+      padding: 8px 18px; margin-bottom: 24px; font-size: 16px; font-weight: 300;
+    }
+    .subsection-badge-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 1.5px solid var(--black-70);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: var(--black-70); flex-shrink: 0;
+    }
+
+    /* ── EXTERNAL USABILITY TESTING ── */
+    .usability-layout { display: flex; gap: 40px; align-items: flex-start; }
+    .usability-matrix { flex: 0 0 45%; }
+    .usability-matrix img { width: 100%; border-radius: 10px; }
+    .usability-right { flex: 1; }
+    .usability-right p { font-size: 18px; line-height: 1.6; margin-bottom: 20px; }
+    .factors-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 24px; }
+    .factor-item { display: flex; align-items: center; gap: 10px; }
+    .factor-item img { width: 24px; height: 24px; object-fit: contain; }
+    .factor-label { font-size: 16px; }
+    .factor-num { font-size: 14px; font-weight: 300; color: var(--black-70); }
+
+    .usability-results { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; width: 100%; }
+    .usability-result-card {
+      background: var(--green-30); border-radius: 12px; padding: 16px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .usability-result-card img { width: 60px; height: 60px; object-fit: contain; mix-blend-mode: multiply; flex-shrink: 0; }
+    .usability-result-text { font-size: 15px; }
+    .usability-result-text strong { font-weight: 500; display: block; margin-bottom: 6px; }
+    .usability-result-text ul { list-style: none; padding: 0; }
+    .usability-result-text ul li { display: flex; gap: 6px; line-height: 1.5; }
+    .usability-result-text ul li::before { content: "○"; flex-shrink: 0; }
+
+    /* ── FEATURE FINALIZATION ── */
+    .finalization-layout { display: flex; gap: 40px; align-items: flex-start; }
+    .finalization-matrix { flex: 0 0 50%; }
+    .finalization-matrix img { width: 100%; border-radius: 10px; }
+    .finalization-right { flex: 1; }
+    .finalization-right p { font-size: 18px; line-height: 1.6; margin-bottom: 20px; }
+    .finalization-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .finalization-card {
+  background: transparent; padding: 0;
+}
+.finalization-card-title {
+  font-size: 18px; font-weight: 500; margin-bottom: 14px;
+  background: var(--green-30); border-radius: 8px;
+  padding: 8px 0px; display: block; text-align: left;
+  width: 100%;
+}
+.finalization-card img { width: 100px; height: 100px; object-fit: contain; display: block; margin: 16px auto 10px auto; }
+    .finalization-card ul { list-style: none; padding: 0; }
+    .finalization-card ul li { display: flex; gap: 6px; font-size: 15px; line-height: 1.5; margin-bottom: 4px; }
+    .finalization-card ul li::before { content: "○"; flex-shrink: 0; }
+
+    /* ── CAD REFINEMENTS ── */
+    .refinements-equation {
+      display: flex; align-items: center; justify-content: center;
+      gap: 32px; flex-wrap: nowrap;
+    }
+    .refinement-item { display: flex; flex-direction: column; align-items: center; gap: 12px; flex: 1; max-width: 220px; }
+    .refinement-item img { width: 140px; height: 140px; object-fit: contain; mix-blend-mode: multiply; }
+    .refinement-annotations { font-size: 14px; line-height: 1.5; text-align: center; }
+    .refinement-annotations p { margin-bottom: 6px; }
+    .eq-operator { font-size: 40px; font-weight: 300; color: var(--black-70); flex-shrink: 0; }
+
+    /* ── FINAL DELIVERABLES ── */
+    .final-deliverables-layout { display: flex; flex-direction: column; gap: 40px; }
+    .final-annotated { position: relative; background: var(--green-30); border-radius: 16px; padding: 40px 60px; }
+    .final-annotated img.main-img { width: 70%; display: block; margin: 0 auto; }
+    .annotation-callout {
+      position: absolute; font-size: 14px; line-height: 1.4; max-width: 160px;
+    }
+    .annotation-callout::after {
+      content: ''; display: block; width: 6px; height: 6px;
+      background: #000; border-radius: 50%; position: absolute;
+    }
+    .final-3d { background: var(--green-30); border-radius: 16px; padding: 30px; display: flex; justify-content: center; align-items: center; gap: 60px; }
+    .final-3d img { width: 55%; object-fit: contain; mix-blend-mode: multiply; }
+    .final-3d-labels { display: flex; flex-direction: column; gap: 20px; font-size: 18px; }
+    .final-3d-labels span { display: flex; align-items: center; gap: 10px; }
+    .dot-label { width: 8px; height: 8px; background: #000; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+    .cross-section-card {
+  position: relative;
+  border-radius: 16px;
+  padding: 30px 20px;
+  margin-bottom: 28px;
+}
+
+.cross-section-diagram {
+  position: relative;
+  width: 100%;
+}
+
+.cross-section-diagram img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+.cs-label {
+  position: absolute;
+  font-size: 16px;
+  line-height: 1.1;
+  color: #000;
+  max-width: 190px;
+}
+
+.cs-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.cs-line {
+  position: absolute;
+  height: 5px;
+  background: #000;
+  transform-origin: left center;
+}
+
+/* label positions */
+.cs-label.base { top: 3%; left: 0%; }
+.cs-dot.base { top: 22.5%; left: 5.5%; }
+.cs-line.base {
+  width: 100px;
+  top: 10%;
+  left: 2%;
+  transform: rotate(62deg);
+}
+
+.cs-label.snap { top: -5%; left: 43%; }
+.cs-dot.snap { top: 17%; left: 50%; }
+.cs-line.snap {
+  width: 105px;
+  top: 2%;
+  left: 48%;
+  transform: rotate(73deg);
+}
+
+.cs-label.geometry { top: 1%; right: 8%; }
+.cs-dot.geometry { top: 19%; left: 65%; }
+.cs-line.geometry {
+  width: 115px;
+  top: 20%;
+  left: 66%;
+  transform: rotate(-55deg);
+}
+
+.cs-label.channel { top: 48%; right: -15%; }
+.cs-dot.channel { top: 50%; left: 80%; }
+.cs-line.channel {
+  width: 180px;
+  top: 51.5%;
+  left: 80%;
+}
+
+.cs-label.flange {
+  bottom: 1%;
+  left: 54%;
+  max-width: 240px;
+}
+
+.cs-dot.flange-1 { top: 79%; left: 22%; }
+.cs-line.flange-1 {
+  width: 300px;
+  top: 80%;
+  left: 23%;
+  transform: rotate(17deg);
+}
+
+.cs-dot.flange-2 { top: 75%; left: 50%; }
+.cs-line.flange-2 {
+  width: 100px;
+  top: 76%;
+  left: 51%;
+  transform: rotate(110deg);
+}
+.final-3d-annotated {
+  position: relative;
+  border-radius: 16px;
+  padding: 30px;
+  margin-top: 28px;
+}
+
+.final-3d-annotated img {
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+}
+
+.label-3d {
+  position: absolute;
+  font-size: 18px;
+  color: #000;
+}
+
+.dot-3d {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.line-3d {
+  position: absolute;
+  height: 3px;
+  background: #000;
+  transform-origin: left center;
+}
+
+/* Ear Stem */
+.label-3d.stem {
+  top: 24%;
+  left: 7%;
+}
+
+.dot-3d.stem {
+  top: 37%;
+  left: 21%;
+}
+
+.line-3d.stem {
+  width: 115px;
+  top: 29%;
+  left: 11%;
+  transform: rotate(25deg);
+}
+
+/* Ear Tip */
+.label-3d.tip {
+  top: 16.5%;
+  right: 30%;
+}
+
+.dot-3d.tip {
+  top: 26%;
+  left: 47%;
+}
+
+.line-3d.tip {
+  width: 170px;
+  top: 27%;
+  left: 48%;
+  transform: rotate(-15deg);
+}
+    /* ── CROSS SECTION ANNOTATED ── */
+    .cross-section-wrap { background: var(--green-30); border-radius: 16px; padding: 32px; }
+    .cross-section-inner { display: flex; gap: 24px; align-items: center; }
+    .cross-section-left-annotations { flex: 0 0 180px; display: flex; flex-direction: column; gap: 20px; font-size: 14px; line-height: 1.4; text-align: right; }
+    .cross-section-img { flex: 1; }
+    .cross-section-img img { width: 100%; border-radius: 12px; }
+    .cross-section-right-annotations { flex: 0 0 180px; display: flex; flex-direction: column; gap: 20px; font-size: 14px; line-height: 1.4; }
+
+    /* ── INJECTION MOLDING ── */
+    .mold-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 36px; }
+    .mold-card { background: var(--green-30); border-radius: 14px; padding: 20px; }
+    .mold-card-title { font-size: 16px; font-weight: 500; margin-bottom: 14px; }
+    .mold-card img { width: 100%; border-radius: 8px; object-fit: cover; }
+    .mold-label-row { display: flex; gap: 6px; align-items: flex-start; margin-bottom: 6px; }
+    .mold-dot { width: 10px; height: 10px; background: var(--green-100); border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+    .mold-label-text { font-size: 13px; line-height: 1.4; }
+
+    .mold-assembled-imgs { display: flex; flex-direction: column; gap: 8px; }
+    .mold-assembled-imgs img { width: 100%; border-radius: 8px; }
+
+    .instructions-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+    }
+    .instruction-step {
+      background: var(--green-30); border-radius: 10px;
+      padding: 20px 16px; font-size: 16px; font-weight: 300;
+      text-align: center;
+    }
+
+    .completed-molds-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.completed-molds-grid img { width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 1/1; max-height: 170px; }
+
+    .molding-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 12px; }
+
+    /* ── MANUFACTURING DOCUMENTATION ── */
+    .mfg-doc { text-align: center; padding: 40px 0 60px; }
+    .mfg-doc img { width: 120px; height: 120px; object-fit: contain; margin-bottom: 24px; }
+    .mfg-doc p { font-size: 20px; line-height: 1.6; }
+    .mfg-doc a { color: var(--green-100); text-decoration: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 18px 60px; margin-top: 40px;
+      border-top: 2px solid var(--green-30);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-copy { font-size: 20px; }
+    .footer-link img { width: 20px; height: 20px; object-fit: contain; }
+    .footer-links { display: flex; flex-direction: column; gap: 7px; align-items: flex-end; }
+    .footer-link {
+      display: flex; align-items: center; gap: 7px;
+      text-decoration: none; color: var(--black); font-size: 18px;
+    }
+    .footer-icon {
+      width: 24px; height: 24px; background: var(--green-100);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; flex-shrink: 0;
+    }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Star icon as section header star */
+    .star-icon { font-size: 40px; line-height: 1; }
+    /* ============================================================
+       RESPONSIVE — does not change desktop appearance
+       ============================================================ */
+       @media (max-width: 900px) {
+      header { padding: 10px 20px; flex-wrap: wrap; gap: 10px; }
+      .nav-item img { width: 40px; height: 40px; }
+      .nav-item span { font-size: 16px; }
+      nav { gap: 20px; }
+
+      main { padding: 0 24px; }
+
+      .section { padding: 40px 0 28px; }
+      .section-head img { width: 40px; height: 40px; }
+      .section-head h2 { font-size: 30px; }
+
+      /* Hero */
+      .hero-body { flex-direction: column; gap: 24px; }
+      .hero-left { flex: 1 1 auto; width: 100%; }
+      .hero-title { font-size: 32px; }
+      .hero-desc { font-size: 17px; }
+      .hero-right img { width: 100%; }
+
+      /* Overview */
+      .overview-grid { flex-direction: column; gap: 24px; }
+      .overview-left { flex: 1 1 auto; width: 100%; }
+      .overview-meta { font-size: 16px; }
+      .overview-right p { font-size: 16px; }
+
+      /* Research process */
+      .process-grid { grid-template-columns: 1fr; gap: 28px; }
+      .process-grid > div[style*="grid-column: span 3"] { grid-column: span 1 !important; }
+      .process-grid > div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important; gap: 28px !important;
+      }
+      /* Competitive analysis image row */
+      .process-grid div[style*="justify-content: space-between"][style*="position: absolute"] {
+        position: static !important;
+        flex-wrap: wrap !important;
+        padding: 0 0 12px 0 !important;
+        gap: 16px !important;
+      }
+      .process-grid div[style*="padding-top: 65px"] { padding-top: 0 !important; }
+      .process-grid div[style*="padding: 50px 40px 24px"] {
+        padding: 24px 20px !important;
+      }
+      .process-grid div[style*="padding: 50px 40px 24px"] > div {
+        flex-wrap: wrap !important;
+        gap: 16px !important;
+      }
+      .process-grid div[style*="padding: 50px 40px 24px"] ul {
+        flex: 1 1 140px !important;
+      }
+      /* Internal user testing row */
+      .process-card div[style*="display:flex; gap:16px"] { flex-wrap: wrap; }
+
+      /* Initial sketches */
+      .sketches-grid { flex-direction: column; }
+      .sketch-tall, .sketch-wide { flex: 1 1 auto; width: 100%; }
+      .sketches-middle { width: 100%; }
+
+      /* CAD cards */
+      div[style*="grid-template-columns:1fr 1fr"][style*="margin-bottom:36px"] {
+        grid-template-columns: 1fr !important;
+      }
+      .cad-designs-grid { grid-template-columns: 1fr 1fr; }
+      .cad-designs-grid-5 { grid-template-columns: 1fr 1fr; }
+      .cad-designs-grid-4 { grid-template-columns: 1fr 1fr; }
+
+      /* Usability */
+      .usability-layout { flex-direction: column; gap: 24px; }
+      .usability-matrix { flex: 1 1 auto; width: 100%; }
+      .factors-grid { grid-template-columns: 1fr; }
+      .usability-results { grid-template-columns: 1fr; }
+
+      /* Finalization */
+      .finalization-layout { flex-direction: column; gap: 24px; }
+      .finalization-matrix { flex: 1 1 auto; width: 100%; }
+      .finalization-cards { grid-template-columns: 1fr; }
+
+      /* Cross section + 3D annotated — shrink proportional elements */
+      .cs-label { font-size: 11px; max-width: 110px; }
+      .cs-dot { width: 12px; height: 12px; }
+      .cs-line { height: 3px; }
+      .cs-label.channel { right: -4%; max-width: 100px; }
+      .cs-label.flange { max-width: 160px; }
+
+      .label-3d { font-size: 13px; }
+      .dot-3d { width: 12px; height: 12px; }
+      .line-3d { height: 2px; }
+
+      /* Injection molding */
+      .mold-cards { grid-template-columns: 1fr; }
+      .instructions-grid { grid-template-columns: 1fr; }
+      .completed-molds-grid { grid-template-columns: 1fr 1fr; }
+      .molding-bottom { grid-template-columns: 1fr; gap: 28px; }
+
+      footer { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px 20px; }
+      .footer-links { align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .logo { display: none; }
+      main { padding: 0 16px; }
+      .hero-title { font-size: 26px; }
+      .section-head h2 { font-size: 24px; }
+      .cad-designs-grid,
+      .cad-designs-grid-5,
+      .cad-designs-grid-4 { grid-template-columns: 1fr 1fr; }
+      .completed-molds-grid { grid-template-columns: 1fr; }
+
+      .cs-label { font-size: 10px; max-width: 90px; }
+      .label-3d { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo">
+    <img src="assets/spiral.png" alt="spiral"/>
+    <span class="logo-name">潘佳音</span>
+  </a>
+  <nav>
+    <a href="index.html#work" class="nav-item"><img src="assets/jellycat.png" alt="work"/><span>work</span></a>
+    <a href="index.html#about" class="nav-item"><img src="assets/plant.png" alt="about"/><span>about</span></a>
+    <a href="index.html#interests" class="nav-item"><img src="assets/cat.png" alt="interests"/><span>interests</span></a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section class="hero reveal">
+    <a href="index.html" class="back-btn">
+      <img src="assets/Arrow_left-circle.png" alt="back"/>
+    </a>
+    <div class="hero-body">
+      <div class="hero-left">
+        <div class="hero-title">eko health</div>
+        <p class="hero-desc">A CAD redesign of Eko's CORE 500 Stethoscope ear tip/ear stem to improve comfort and acoustic seal.</p>
+      </div>
+      <div class="hero-right">
+        <img src="assets/image 148.png" alt="Eko Health CAD"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OVERVIEW ── -->
+  <section class="section reveal">
+    <div class="section-head">
+      <img src="assets/star_1.png" alt="star"/>
+      <h2>overview.</h2>
+    </div>
+    <div class="section-divider"></div>
+    <div class="overview-grid">
+      <div class="overview-left">
+        <div class="overview-meta">
+          <p><strong>Role</strong>: Product Development Engineering Consultant</p>
+          <p><strong>Duration</strong>: February 2025 - May 2025</p>
+          <p><strong>Tools</strong>: SolidWorks, OnShape</p>
+        </div>
+        <a href="#final-deliverables" class="jump-btn">
+          Jump directly to final design
+          <img src="assets/Arrow_down-circle.png" alt="down"/>
+        </a>
+      </div>
+      <div class="overview-right">
+        <p><strong>Background:</strong> This project was completed in Invention Corps, a human-centered design club at UC Berkeley. A group of 5, including myself, worked on improving the comfort and seal of Eko's CORE 500 Stethoscope ear tip/ear stem.</p>
+        <p><strong>Problem:</strong> While researching current stethoscope ear tip designs for the Eko Health Core 500, we found that existing solutions present notable quality and functionality issues, including user discomfort over extended use, instability due to ear tips detaching too easily, and a lack of adaptability to diverse ear canal shapes and sizes. There is a gap between the ergonomic and performance needs of clinicians and how ear tip designs are currently engineered.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESEARCH PROCESS ── -->
+  <section class="section reveal">
+    <div class="section-head">
+      <img src="assets/star_2.png" alt="star"/>
+      <h2>research process.</h2>
+    </div>
+    <div class="section-divider"></div>
+    <div class="process-grid">
+    <!-- Competitive Analysis -->
+<div style="grid-column: span 3; display: flex; flex-direction: column; gap: 16px;">
+    <div class="process-badge" style="width: fit-content;">
+      <div class="process-badge-num">1</div>
+      <span class="process-badge-label">Competitive Analysis</span>
+    </div>
+  
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: stretch;">
+        <div style="flex: 1 1 160px; min-width: 160px; display: flex; flex-direction: column; align-items: center; background: var(--green-30); border-radius: 14px; padding: 20px 14px; position: relative;">
+          <span style="font-size:16px; font-weight:500; text-align:center; min-height:44px; display:flex; align-items:center;">Apple AirPods Pro 2</span>
+          <div style="height:100px; display:flex; align-items:center; justify-content:center;position:relative; z-index:5;">
+            <img src="assets/image_149.png" style="width:80px; height:80px; object-fit:contain; mix-blend-mode:multiply;"/>
+          </div>
+          <ul style="list-style:none; padding:0; width:100%; text-align:center;">
+            <li style="font-size:15px; line-height:1.6;">○ Shallow Ear Tip</li>
+            <li style="font-size:15px; line-height:1.6;">○ Secure Latch Mechanism</li>
+          </ul>
+        </div>
+        <div style="flex: 1 1 160px; min-width: 160px; display: flex; flex-direction: column; align-items: center; background: var(--green-30); border-radius: 14px; padding: 20px 14px; position: relative;">
+          <span style="font-size:16px; font-weight:500; text-align:center; min-height:44px; display:flex; align-items:center;">Beats Studio Buds</span>
+          <div style="height:100px; display:flex; align-items:center; justify-content:center;position:relative; z-index:5;">
+            <img src="assets/image_150.png" style="width:80px; height:80px; object-fit:contain; mix-blend-mode:multiply;"/>
+          </div>
+          <ul style="list-style:none; padding:0; width:100%; text-align:center;">
+            <li style="font-size:15px; line-height:1.6;">○ Rigid Stem</li>
+            <li style="font-size:15px; line-height:1.6;">○ Align and twist to fit in ear</li>
+          </ul>
+        </div>
+        <div style="flex: 1 1 160px; min-width: 160px; display: flex; flex-direction: column; align-items: center; background: var(--green-30); border-radius: 14px; padding: 20px 14px; position: relative;">
+          <span style="font-size:16px; font-weight:500; text-align:center; min-height:44px; display:flex; align-items:center;">Google Pixel Buds</span>
+          <div style="height:100px; display:flex; align-items:center; justify-content:center;position:relative; z-index:5;">
+            <img src="assets/image_151.png" style="width:80px; height:80px; object-fit:contain; mix-blend-mode:multiply;"/>
+          </div>
+          <ul style="list-style:none; padding:0; width:100%; text-align:center;">
+            <li style="font-size:15px; line-height:1.6;">○ Stabilizing fins to keep earbuds secure</li>
+            <li style="font-size:15px; line-height:1.6;">○ Small &amp; light</li>
+          </ul>
+        </div>
+        <div style="flex: 1 1 160px; min-width: 160px; display: flex; flex-direction: column; align-items: center; background: var(--green-30); border-radius: 14px; padding: 20px 14px; position: relative;">
+          <span style="font-size:16px; font-weight:500; text-align:center; min-height:44px; display:flex; align-items:center;">Bose QuietComfort Earbuds</span>
+          <div style="height:100px; display:flex; align-items:center; justify-content:center; position:relative; z-index:5">
+            <img src="assets/image_152.png" style="width:80px; height:80px; object-fit:contain; mix-blend-mode:multiply;"/>
+          </div>
+          <ul style="list-style:none; padding:0; width:100%; text-align:center;">
+            <li style="font-size:15px; line-height:1.6;">○ Rounded design</li>
+            <li style="font-size:15px; line-height:1.6;">○ Extended comfort</li>
+            <li style="font-size:15px; line-height:1.6;">○ Multiple sizing &amp; stability bands</li>
+          </ul>
+        </div>
+        <div style="flex: 1 1 160px; min-width: 160px; display: flex; flex-direction: column; align-items: center; background: var(--green-30); border-radius: 14px; padding: 20px 14px; position: relative;">
+          <span style="font-size:16px; font-weight:500; text-align:center; min-height:44px; display:flex; align-items:center;">Loop Earplugs</span>
+          <div style="height:100px; display:flex; align-items:center; justify-content:center; position:relative; z-index:5;">
+            <img src="assets/image_153.png" style="width:80px; height:80px; object-fit:contain; mix-blend-mode:multiply;"/>
+          </div>
+          <ul style="list-style:none; padding:0; width:100%; text-align:center;">
+            <li style="font-size:15px; line-height:1.6;">○ Easy to attach</li>
+            <li style="font-size:15px; line-height:1.6;">○ Noise cancelling either too much or too little</li>
+          </ul>
+        </div>
+      </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; grid-column: span 3; margin-top: 28px;">
+
+    <!-- Internal User Testing -->
+    <div class="process-card">
+      <div class="process-badge" style="width: fit-content;">
+        <div class="process-badge-num">2</div>
+        <span class="process-badge-label">Internal User Testing</span>
+      </div>
+      <div style="display:flex; gap:16px; align-items:flex-start; width:100%;">
+        <img src="assets/image_154.png"
+             alt="Original Ear Tip" style="width:200px; object-fit:contain; mix-blend-mode:multiply;"/>
+        <div style="text-align:left;">
+          <div style="font-size:18px; font-weight:500; margin-bottom:8px;">Original Ear Tip</div>
+          <div style="font-size:16px; font-weight:500; margin-bottom:6px;">Users Experienced:</div>
+          <ul style="list-style:none;padding:0;">
+            <li style="font-size:16px;display:flex;gap:6px;line-height:1.5;"><span>○</span>Strong pressure</li>
+            <li style="font-size:16px;display:flex;gap:6px;line-height:1.5;"><span>○</span>Discomfort with head movements</li>
+            <li style="font-size:16px;display:flex;gap:6px;line-height:1.5;"><span>○</span>Poor adaptability for those with small &amp; rounded ears</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Research Papers -->
+    <div class="process-card">
+      <div class="process-badge" style="width: fit-content;">
+        <div class="process-badge-num">3</div>
+        <span class="process-badge-label">Research Papers</span>
+      </div>
+      <img src="assets/anatomy.png" alt="Ear anatomy research"
+           style="width:100%; border-radius:10px;"/>
+    </div>
+  
+  </div>
+  </section>
+
+  <!-- ── INITIAL SKETCHES ── -->
+  <section class="section reveal">
+    <div class="section-head">
+      <img src="assets/star_3.png" alt="star"/>
+      <h2>initial sketches.</h2>
+    </div>
+    <div class="section-divider"></div>
+    <div class="sketches-grid">
+      <div class="sketch-tall sketch-img" style="flex: 0 0 130px;">
+        <img src="assets/image_155.png" alt="Sketch 1"/>
+      </div>
+      <div class="sketches-middle">
+        <div class="sketch-img"><img src="assets/image_157.png" alt="Sketch grid paper"/></div>
+        <div class="sketch-img"><img src="assets/sketch_3.png" alt="Ear stem tip sketch"/></div>
+        <div class="sketch-img"><img src="assets/image_156.png" alt="Ball joint sketch"/></div>
+        <div class="sketch-img"><img src="assets/sketch_5.png" alt="Angled fit sketch"/></div>
+      </div>
+      <div class="sketch-wide sketch-img">
+        <img src="assets/sketch_6.png" alt="Annular snap fit notes"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FIRST PHASE CAD ── -->
+  <section class="section reveal">
+    <div class="section-head">
+      <img src="assets/star_4.png" alt="star"/>
+      <h2>first phase cad.</h2>
+    </div>
+    <div class="section-divider"></div>
+
+    <!-- Two side-by-side CAD cards -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:36px;">
+      <!-- Ear Tip Designs -->
+      <div class="cad-card">
+        <div class="cad-card-badge">1</div>
+        <div class="cad-card-title">
+          <img src="assets/eartip.png" alt="original"/>
+          Ear Tip Designs
+        </div>
+        <div class="cad-designs-grid">
+          <div class="cad-design-item">
+            <img src="assets/eartip_2.png" alt="Design 1"/>
+            <span class="cad-design-label">Design #1</span>
+          </div>
+          <div class="cad-design-item">
+            <img src="assets/eartip_3.png" alt="Design 2"/>
+            <span class="cad-design-label">Design #2</span>
+          </div>
+          <div class="cad-design-item">
+            <img src="assets/eartip_4.png" alt="Design 3"/>
+            <span class="cad-design-label">Design #3</span>
+          </div>
+          <div class="cad-design-item">
+            <img src="assets/eartip_6.png" alt="Design 4"/>
+            <span class="cad-design-label">Design #4</span>
+          </div>
+          <div class="cad-design-item">
+            <img src="assets/eartip_5.png" alt="Design 5"/>
+            <span class="cad-design-label">Design #5</span>
+          </div>
+          <div class="cad-design-item">
+            <img src="assets/design3.png" alt="Design 6"/>
+            <span class="cad-design-label">Design #6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ear Stem Designs -->
+      <div class="cad-card">
+        <div class="cad-card-badge">2</div>
+        <div class="cad-card-title">
+          <img src="assets/earstem.png" alt="original stem"/>
+          Ear Stem Designs
+        </div>
+        <div class="cad-designs-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="cad-design-item">
+            <img src="assets/earstem_1.png" alt="Stem Design 1"/>
+            <span class="cad-design-label">Design #1</span>
+          </div>
+          <div class="cad-design-item">
+            <img src="assets/earstem_2.png" alt="Stem Design 2"/>
+            <span class="cad-design-label">Design #2</span>
+          </div>
+          <div class="cad-design-item">
+            <img src="assets/earstem_3.png" alt="Stem Design 3"/>
+            <span class="cad-design-label">Design #3</span>
+          </div>
+          <div class="cad-design-item">
+            <img src="assets/earstem_4.png" alt="Stem Design 4"/>
+            <span class="cad-design-label">Design #4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- External Usability Testing -->
+<div class="subsection-badge">
+  External Usability Testing
+</div>
+<div class="usability-layout">
+  <div class="usability-matrix">
+    <img src="assets/externalusability.png" alt="Ear Tip Feature Matrix"/>
+  </div>
+  <div class="usability-right">
+    <p>We decided to move forward with testing with external users for Ear Tip Design #1 and Design #3 from an ear tip and ear stem CAD feature matrix critique session where we evaluated based on a couple criteria:</p>
+    <div class="factors-grid">
+      <div class="factor-item">
+        <img src="assets/bed.png" alt="comfort"/>
+        <div>
+          <div class="factor-num">Factor #1</div>
+          <div class="factor-label" style="font-weight:500;">Comfort</div>
+        </div>
+      </div>
+      <div class="factor-item">
+        <img src="assets/material.png" alt="material"/>
+        <div>
+          <div class="factor-num">Factor #4</div>
+          <div class="factor-label" style="font-weight:500;">Material Compatibility</div>
+        </div>
+      </div>
+      <div class="factor-item">
+        <img src="assets/ear.png" alt="anatomical"/>
+        <div>
+          <div class="factor-num">Factor #2</div>
+          <div class="factor-label" style="font-weight:500;">Anatomical Fit</div>
+        </div>
+      </div>
+      <div class="factor-item">
+        <img src="assets/sound.png" alt="acoustics"/>
+        <div>
+          <div class="factor-num">Factor #5</div>
+          <div class="factor-label" style="font-weight:500;">Seal/Acoustics</div>
+        </div>
+      </div>
+      <div class="factor-item">
+        <img src="assets/manufacturing.png" alt="manufacturing"/>
+        <div>
+          <div class="factor-num">Factor #3</div>
+          <div class="factor-label" style="font-weight:500;">Manufacturing Feasibility</div>
+        </div>
+      </div>
+      <div class="factor-item">
+        <img src="assets/aesthetics.png" alt="aesthetics"/>
+        <div>
+          <div class="factor-num">Factor #6</div>
+          <div class="factor-label" style="font-weight:500;">Aesthetics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="usability-results">
+    <div style="border-radius: 12px; display: grid; grid-template-columns: 2fr 3fr; background-image: url('assets/green_box.png'); background-size: 100% 100%; background-repeat: no-repeat; min-height: 160px;">
+      <div style="display: flex; align-items: center; justify-content: center; padding: 16px;">
+        <img src="assets/design1.png" alt="Design 1" style="width: 120px; height: 120px; object-fit: contain;"/>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; padding: 16px; font-size: 15px;">
+        <div style="font-weight: 500; margin-bottom: 4px;">Design #1</div>
+        <div style="font-weight: 500; margin-bottom: 8px;">Users experienced:</div>
+        <ul style="list-style: none; padding: 0;">
+          <li style="line-height: 1.6;">○ Poor Seal</li>
+          <li style="line-height: 1.6;">○ Inability to conform to ear canal</li>
+          <li style="line-height: 1.6;">○ Bulky Design</li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-radius: 12px; display: grid; grid-template-columns: 2fr 3fr; background-image: url('assets/green_box.png'); background-size: 100% 100%; background-repeat: no-repeat; min-height: 160px;">
+      <div style="display: flex; align-items: center; justify-content: center; padding: 16px;">
+        <img src="assets/design3.png" alt="Design 3" style="width: 150px; height: 150px; object-fit: contain;"/>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; padding: 16px; font-size: 15px;">
+        <div style="font-weight: 500; margin-bottom: 4px;">Design #3</div>
+        <div style="font-weight: 500; margin-bottom: 8px;">Users experienced:</div>
+        <ul style="list-style: none; padding: 0;">
+          <li style="line-height: 1.6;">○ Deep intrusion into ear canal</li>
+          <li style="line-height: 1.6;">○ Limited noise isolation</li>
+          <li style="line-height: 1.6;">○ Reservations about aesthetics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECOND PHASE CAD ── -->
+  <section class="section reveal">
+    <div class="section-head">
+      <img src="assets/star_5.png" alt="star"/>
+      <h2>second phase cad.</h2>
+    </div>
+    <div class="section-divider"></div>
+
+    <!-- Single wide Ear Tip card -->
+    <div class="cad-card" style="margin-bottom:36px;">
+      <div class="cad-card-title">
+        <img src="assets/eartip.png" alt="original"/>
+        Ear Tip Designs
+      </div>
+      <div class="cad-designs-grid-5">
+        <div class="cad-design-item">
+          <img src="assets/eartip_7.png" alt="Design 7"/>
+          <span class="cad-design-label">Design #7</span>
+        </div>
+        <div class="cad-design-item">
+          <img src="assets/eartip_8.png" alt="Design 8"/>
+          <span class="cad-design-label">Design #8</span>
+        </div>
+        <div class="cad-design-item">
+          <img src="assets/eartip_9.png" alt="Design 9"/>
+          <span class="cad-design-label">Design #9</span>
+        </div>
+        <div class="cad-design-item">
+          <img src="assets/eartip_10.png" alt="Design 10"/>
+          <span class="cad-design-label">Design #10</span>
+        </div>
+        <div class="cad-design-item">
+          <img src="assets/eartip_11.png" alt="Design 11"/>
+          <span class="cad-design-label">Design #11</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Finalization -->
+    <div class="subsection-badge">
+      Feature Finalization
+    </div>
+    <div class="finalization-layout">
+      <div class="finalization-matrix">
+        <img src="assets/featurefinalization.png" alt="Feature Matrix Phase 2"/>
+      </div>
+      <div class="finalization-right">
+        <p>We decided to move forward with Design #10/#4 based on our CAD feature matrix, which used the same criteria as Phase 1.</p>
+        <p>Design #4 features the following:</p>
+        <div class="finalization-cards">
+            <div class="finalization-card">
+              <div class="finalization-card-title">&nbsp;&nbsp;Ear Tip</div>
+              <img src="assets/eartip_10.png" alt="Final Ear Tip"/>
+              <ul>
+                <li> Bulbous end</li>
+                <li> Outer ear contour alignment</li>
+                <li> Sleek, smooth exterior</li>
+                <li> Greater contact with ear</li>
+                <li> Two distinct contour regions</li>
+              </ul>
+            </div>
+            <div class="finalization-card">
+              <div class="finalization-card-title">&nbsp;&nbsp;Ear Stem</div>
+              <img src="assets/tapered_end.png" alt="Tapered End"/>
+              <ul>
+                <li> Tapered end</li>
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CAD REFINEMENTS ── -->
+  <section class="section reveal">
+    <div class="section-head">
+      <img src="assets/star_6.png" alt="star"/>
+      <h2>cad refinements.</h2>
+    </div>
+    <div class="section-divider"></div>
+    <div style="border-radius: 16px; padding: 40px 32px;">
+        <img src="assets/cad_refinement_image.png" alt="CAD Refinements" style="width: 100%; object-fit: contain;"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL DELIVERABLES ── -->
+  <section class="section reveal" id="final-deliverables">
+    <div class="section-head">
+      <img src="assets/star_7.png" alt="star"/>
+      <h2>final deliverables.</h2>
+    </div>
+    <div class="section-divider"></div>
+
+    <!-- Cross section (fully labeled image) -->
+    <div class="cross-section-card">
+        <div class="cross-section-diagram">
+          <img src="assets/eartip_inside.png" alt="Ear tip cross section with labeled features"/>
+        </div>
+      </div>
+  
+      <!-- 3D assembled view (fully labeled image) -->
+      <div class="final-3d-annotated">
+        <img src="assets/eartip_outside.png" alt="Ear tip and ear stem assembled view with labels"/>
+      </div>
+
+  <!-- ── INJECTION MOLDING ── -->
+  <section class="section reveal">
+    <div class="section-head">
+      <img src="assets/star_8.png" alt="star"/>
+      <h2>injection molding.</h2>
+    </div>
+    <div class="section-divider"></div>
+
+    <!-- Set-up Components -->
+    <div class="subsection-badge">
+        <div class="subsection-badge-num">1</div>
+        Set-up Components
+      </div>
+    <img src="assets/injection.png" alt="Injection molding components" style="width: 100%; border-radius: 14px;"/>
+    <!-- Instructions + Completed Molds -->
+    <div class="molding-bottom">
+      <div>
+        <div class="subsection-badge">
+          <div class="subsection-badge-num">2</div>
+          Instructions / Process
+        </div>
+        <div class="instructions-grid">
+          <div class="instruction-step">1. &nbsp;Prepare Workspace</div>
+          <div class="instruction-step">2. &nbsp;Assemble Mold Tool</div>
+          <div class="instruction-step">3. &nbsp;Clamp Mold Halves</div>
+          <div class="instruction-step">4. &nbsp;Mix equal parts silicone and rubber</div>
+          <div class="instruction-step">5. &nbsp;Fill syringe with slurry</div>
+          <div class="instruction-step">6. &nbsp;Inject slurry into mold</div>
+          <div class="instruction-step">7. &nbsp;Wait for curing</div>
+          <div class="instruction-step">8. &nbsp;Eject Eartips</div>
+        </div>
+      </div>
+      <div>
+        <div class="subsection-badge">
+          <div class="subsection-badge-num">3</div>
+          Completed Molds
+        </div>
+        <div class="completed-molds-grid">
+          <img src="assets/Group 39779.png" alt="Completed ear tips on surface"/>
+          <img src="assets/IMG_5879 1.png" alt="Ear tips on stethoscope"/>
+          <img src="assets/IMG_5890.png" alt="Translucent ear tips on concrete"/>
+          <img src="assets/View recent photos 1.png" alt="Ear tips on stethoscope stems"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MANUFACTURING DOCUMENTATION ── -->
+  <section class="section reveal">
+    <div class="section-head">
+      <img src="assets/star_9.png" alt="star"/>
+      <h2>manufacturing documentation.</h2>
+    </div>
+    <div class="section-divider"></div>
+    <div class="mfg-doc">
+      <img src="assets/star_character.png" alt="Star character"/>
+      <p>Email <a href="mailto:erin_pan@berkeley.edu">erin_pan@berkeley.edu</a> for the full PDF documentation files.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Made by Erin Pan</span>
+  <div class="footer-links">
+    <a href="mailto:erin_pan@berkeley.edu" class="footer-link">
+        <img src="assets/green_mail.png" alt="email"/>
+      <span>erin_pan@berkeley.edu</span>
+    </a>
+    <a href="https://linkedin.com/in/erin-pan25" target="_blank" class="footer-link">
+        <img src="assets/green_linkedin.png" alt="LinkedIn"/>
+      <span>erin-pan25</span>
+    </a>
+  </div>
+</footer>
+
+<script>
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+  <script src="index.js"></script>
+  </body>
+</html>
