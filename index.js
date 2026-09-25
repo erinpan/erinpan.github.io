@@ -369,57 +369,7 @@
   
     targets.forEach(el => obs.observe(el));
   })();
-  
-  
-  /* ----------------------------------------------------------
-     6. INFINITE MARQUEE STRIP — skills/tools ticker
-        Inserted above the carousel in #work section
-     ---------------------------------------------------------- */
-  (function () {
-    const worksSection = document.querySelector(".recent-works");
-    if (!worksSection) return;
-  
-    const tags = [
-      { label: "Figma",         color: "#E9A5D2" },
-      { label: "Python",        color: "#FDAD0E" },
-      { label: "SQL",           color: "#82E600" },
-      { label: "SolidWorks",    color: "#E9A5D2" },
-      { label: "OnShape",       color: "#FDAD0E" },
-      { label: "Product Design",color: "#82E600" },
-      { label: "Data Analysis", color: "#E9A5D2" },
-      { label: "ML / AI",       color: "#FDAD0E" },
-      { label: "CAD / 3D",      color: "#82E600" },
-      { label: "UX Research",   color: "#E9A5D2" },
-      { label: "A/B Testing",   color: "#FDAD0E" },
-      { label: "Operations",    color: "#82E600" },
-    ];
-  
-    // Duplicate for seamless loop
-    const allTags = [...tags, ...tags];
-  
-    const marqueeEl = document.createElement("div");
-    marqueeEl.id = "erin-marquee";
-  
-    const track = document.createElement("div");
-    track.className = "marquee-track";
-  
-    allTags.forEach(tag => {
-      const pill = document.createElement("div");
-      pill.className = "marquee-tag";
-      pill.innerHTML = `<span class="marquee-dot" style="background:${tag.color}"></span>${tag.label}`;
-      track.appendChild(pill);
-    });
-  
-    marqueeEl.appendChild(track);
-  
-    // Insert between subtitle and carousel wrapper
-    const carousel = worksSection.querySelector(".carousel-wrapper");
-    if (carousel) {
-      worksSection.insertBefore(marqueeEl, carousel);
-    } else {
-      worksSection.appendChild(marqueeEl);
-    }
-  })();
+
   
   /* ----------------------------------------------------------
      8. SPARKLE TRAIL (throttled by distance)
