@@ -421,53 +421,6 @@
     }
   })();
   
-  
-  /* ----------------------------------------------------------
-     7. HOVER IMAGE PREVIEW on exp rows (eugenewan list style)
-        Shows a relevant project image next to cursor on hover
-     ---------------------------------------------------------- */
-  (function () {
-    const preview = document.createElement("div");
-    preview.id = "hover-preview";
-    preview.innerHTML = '<img src="" alt="preview" />';
-    document.body.appendChild(preview);
-    const img = preview.querySelector("img");
-  
-    // Map companies to project images from your assets
-    const companyImages = {
-      "disney":      "assets/disney_logo.png",
-      "tiktok":      "assets/tiktok_logo.png",
-      "ongb":        "assets/ongb_logo.webp",
-      "firefox":     "assets/firefox_logo.png",
-      "wells fargo": "assets/wf_logo.png",
-      "eko health":  "assets/eko_logo.png",
-    };
-  
-    let mouseX = 0, mouseY = 0;
-    document.addEventListener("mousemove", e => {
-      mouseX = e.clientX; mouseY = e.clientY;
-      preview.style.left = (mouseX + 24) + "px";
-      preview.style.top  = (mouseY - 80) + "px";
-    });
-  
-    document.querySelectorAll(".exp-row").forEach(row => {
-      const company = row.querySelector(".exp-company");
-      if (!company) return;
-      const key = company.textContent.trim().toLowerCase();
-      const src = companyImages[key];
-      if (!src) return;
-  
-      row.addEventListener("mouseenter", () => {
-        img.src = src;
-        preview.classList.add("active");
-      });
-      row.addEventListener("mouseleave", () => {
-        preview.classList.remove("active");
-      });
-    });
-  })();
-  
-  
   /* ----------------------------------------------------------
      8. SPARKLE TRAIL (throttled by distance)
      ---------------------------------------------------------- */
