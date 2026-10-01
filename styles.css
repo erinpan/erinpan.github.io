@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "HamIsCute";
+  font-family: "Ham Is Cute";
   src: url("assets/fonts/Blur_Medium.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
@@ -12,7 +12,7 @@
   font-style: normal;
 }
     :root {
-      --bg: #FFF4FB;
+      --bg: #ffffff;
       --pink: #E9A5D2;
       --pink-div: rgba(233,165,210,0.3);
       --orange: #FDAD0E;

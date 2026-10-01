@@ -14,22 +14,17 @@
       *, *::before, *::after { cursor: none !important; }
   
       #erin-cursor {
-        position: fixed;
-        width: 10px; height: 10px;
-        background: #E9A5D2;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 99999;
-        transform: translate(-50%, -50%);
-        transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, opacity 0.2s ease;
-        mix-blend-mode: multiply;
-      }
-      #erin-cursor.hovering {
-        width: 40px; height: 40px;
-        background: rgba(233,165,210,0.25);
-        border: 1.5px solid #E9A5D2;
-      }
-      #erin-cursor.clicking { transform: translate(-50%,-50%) scale(0.7); }
+  position: fixed;
+  width: 28px; height: 28px;
+  background: url("assets/spiral.png") center / contain no-repeat;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease;
+}
+#erin-cursor.clicking {
+  transform: translate(-50%, -50%) scale(0.8);
+}
   
       /* --- Scroll progress bar --- */
       #scroll-prog {
@@ -140,11 +135,6 @@
       .nav-item:nth-child(3) img { animation-delay: 0.7s; }
       .nav-item:hover img { animation-play-state: paused; }
   
-      /* --- Sparkle keyframe --- */
-      @keyframes sparkUp {
-        0%   { opacity: 1; transform: translate(-50%,-50%) scale(1) rotate(0deg); }
-        100% { opacity: 0; transform: translate(-50%, calc(-50% - 28px)) scale(0.15) rotate(35deg); }
-      }
   
       /* --- Exp row accent --- */
       .exp-row {
@@ -224,6 +214,15 @@
         transform: rotate(-2deg) scale(1.05) !important;
         transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1) !important;
       }
+        body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.025' numOctaves='5' seed='3'/%3E%3CfeDiffuseLighting lighting-color='%23fff' surfaceScale='3.0'%3E%3CfeDistantLight azimuth='45' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  }
     `;
     document.head.appendChild(s);
   })();
@@ -368,38 +367,6 @@
     }, { threshold: 0.15 });
   
     targets.forEach(el => obs.observe(el));
-  })();
-
-  
-  /* ----------------------------------------------------------
-     8. SPARKLE TRAIL (throttled by distance)
-     ---------------------------------------------------------- */
-  (function () {
-    const glyphs  = ["★", "✦", "·", "✿", "❋"];
-    const palette = ["#E9A5D2", "#FDAD0E", "#82E600", "#d4a6ff"];
-    let lastX = 0, lastY = 0;
-  
-    document.addEventListener("mousemove", e => {
-      const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-      if (dist < 22) return;
-      lastX = e.clientX; lastY = e.clientY;
-      const span = document.createElement("span");
-      span.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
-      Object.assign(span.style, {
-        position:      "fixed",
-        left:          e.clientX + "px",
-        top:           e.clientY + "px",
-        fontSize:      (10 + Math.random() * 12) + "px",
-        color:         palette[Math.floor(Math.random() * palette.length)],
-        pointerEvents: "none",
-        zIndex:        "9985",
-        userSelect:    "none",
-        lineHeight:    "1",
-        animation:     "sparkUp 0.65s ease forwards",
-      });
-      document.body.appendChild(span);
-      setTimeout(() => span.remove(), 700);
-    });
   })();
   
   
