@@ -25,7 +25,9 @@
 #erin-cursor.clicking {
   transform: translate(-50%, -50%) scale(0.8);
 }
-  
+      body.carousel-grabbing #erin-cursor {
+  transform: translate(-50%, -50%) scale(0.8) rotate(-45deg);
+}
       /* --- Scroll progress bar --- */
       #scroll-prog {
         position: fixed; top: 0; left: 0; z-index: 99998;

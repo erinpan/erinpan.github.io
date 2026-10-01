@@ -47,69 +47,21 @@
     <div class="section-subtitle">
       A small collection of my <span class="design">design</span>, <span class="tech">tech</span>, and <span class="modeling">3D modeling</span> work.
     </div>
-    <div class="carousel-wrapper">
-      <button class="carousel-arrow" id="prevBtn" aria-label="Previous">
-        <svg width="20" height="36" viewBox="0 0 20 36" fill="none">
-          <polyline points="16,3 4,18 16,33" stroke="#E9A5D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
+    <div class="carousel">
       <div class="carousel-track-outer">
         <div class="carousel-track" id="carouselTrack">
-          <div class="carousel-slide slide-pink">
-            <div class="slide-left">
-              <img src="assets/star_1.png" class="slide-star" alt="star"/>
-              <div class="slide-title">wells fargo</div>
-              <p class="slide-desc">A full redesign of Wells Fargo's checking accounts shopping experience.</p>
-              <button class="slide-btn btn-pink">Check it out!</button>
-            </div>
-            <div class="slide-right">
-              <img src="assets/Screenshot_2026-02-19_at_6_01_45_PM-left.png" alt="Wells Fargo"/>
-            </div>
-          </div>
-          <div class="carousel-slide slide-pink">
-            <div class="slide-left">
-              <img src="assets/star_2.png" class="slide-star" alt="star"/>
-              <div class="slide-title">firefox</div>
-              <p class="slide-desc">A FireFox adaptive performance extension to encourage eco-conscious browsing behaviors.</p>
-              <a href="firefox.html" class="slide-btn-link">
-                <button class="slide-btn btn-pink">Check it out!</button>
-              </a>
-            </div>
-            <div class="slide-right">
-              <img src="assets/firefox_image.png" alt="Firefox"/>
-            </div>
-          </div>
-          <div class="carousel-slide slide-orange">
-            <div class="slide-left">
-              <img src="assets/star_3.png" class="slide-star" alt="star"/>
-              <div class="slide-title">ongb</div>
-              <p class="slide-desc">Trained an ML model to uncover predictors of chronic absenteeism in the Oakland School District.</p>
-              <button class="slide-btn btn-orange">Check it out!</button>
-            </div>
-            <div class="slide-right">
-              <img src="assets/image_34.png" alt="ONGB"/>
-            </div>
-          </div>
-          <div class="carousel-slide slide-green">
-            <div class="slide-left">
-              <img src="assets/star_4.png" class="slide-star" alt="star"/>
-              <div class="slide-title">eko health</div>
-              <p class="slide-desc">A CAD redesign of Eko's CORE 500 Stethoscope ear tip/ear stem to improve comfort and acoustic seal.</p>
-              <a href="ekohealth.html" class="slide-btn-link">
-                <button class="slide-btn btn-green">Check it out!</button>
-              </a>
-            </div>
-            <div class="slide-right">
-              <img src="assets/image_1.png" alt="Eko Health"/>
-            </div>
-          </div>
+          <a href="#" class="carousel-slide" data-wash="pink" style="--bg: url('assets/bg_1.png');">
+            <img src="assets/fg_wellsfargo.png" style="--x: 207; --y: 38; --w: 1239;" alt="Wells Fargo — checking accounts redesign"/>
+          </a>
+          <a href="firefox.html" class="carousel-slide" data-wash="pink" style="--bg: url('assets/bg_2.png');">
+            <img src="assets/fg_firefox.png" style="--x: 266; --y: 54; --w: 1194;" alt="Firefox — adaptive performance extension"/>
+          </a>
+          <a href="ekohealth.html" class="carousel-slide" data-wash="green" style="--bg: url('assets/bg_3.png');">
+            <img src="assets/fg_eko.png" style="--x: 179; --y: 107; --w: 1257;" alt="Eko Health — stethoscope ear tip CAD redesign"/>
+          </a>
         </div>
       </div>
-      <button class="carousel-arrow" id="nextBtn" aria-label="Next">
-        <svg width="20" height="36" viewBox="0 0 20 36" fill="none">
-          <polyline points="4,3 16,18 4,33" stroke="#E9A5D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
+      <div class="carousel-dots" id="carouselDots"></div>
     </div>
   </section>
 
@@ -209,16 +161,184 @@
 </footer>
 
 <script>
-  const track = document.getElementById("carouselTrack");
-  const total = track.querySelectorAll(".carousel-slide").length;
-  let current = 0;
-  function goTo(i) {
-    current = (i + total) % total;
-    track.style.transform = "translateX(-" + (current * 100) + "%)";
-  }
-  document.getElementById("prevBtn").onclick = () => goTo(current - 1);
-  document.getElementById("nextBtn").onclick = () => goTo(current + 1);
-</script>
+  (function () {
+    const outer  = document.querySelector(".carousel-track-outer");
+    const track  = document.getElementById("carouselTrack");
+    const slides = Array.from(track.children);
+    const dotsEl = document.getElementById("carouselDots");
+    if (!outer || !track || !slides.length) return;
+  
+    const EASE = "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+    let index = 0, startX = 0, startY = 0, lastX = 0, lastT = 0;
+    let dragX = 0, velocity = 0, dragging = false, axis = null, moved = false;
+  
+    const step = () => slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : outer.offsetWidth;
+    const base = () => -index * step();
+  
+    function setX(x, animate) {
+      track.style.transition = animate ? EASE : "none";
+      track.style.transform = "translate3d(" + x + "px,0,0)";
+    }
+  
+    const dots = slides.map((_, i) => {
+      const b = document.createElement("button");
+      b.className = "carousel-dot";
+      b.setAttribute("aria-label", "Go to project " + (i + 1));
+      b.addEventListener("click", () => goTo(i));
+      dotsEl && dotsEl.appendChild(b);
+      return b;
+    });
+  
+    function goTo(i) {
+      index = Math.max(0, Math.min(slides.length - 1, i));
+      setX(base(), true);
+      dots.forEach((d, n) => d.classList.toggle("active", n === index));
+    }
+  
+    outer.addEventListener("pointerdown", e => {
+      if (e.button !== 0) return;
+      dragging = true; axis = null; moved = false;
+      startX = lastX = e.clientX; startY = e.clientY;
+      lastT = performance.now(); dragX = 0; velocity = 0;
+    });
+  
+    window.addEventListener("pointermove", e => {
+      if (!dragging) return;
+      const dx = e.clientX - startX, dy = e.clientY - startY;
+  
+      // decide if this is a horizontal swipe or a vertical scroll
+      if (!axis) {
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+        if (axis === "x") {
+          outer.setPointerCapture(e.pointerId);
+          outer.classList.add("is-dragging");
+          document.body.classList.add("carousel-grabbing");
+        }
+      }
+      if (axis !== "x") return;
+      moved = true;
+  
+      // track flick speed
+      const now = performance.now();
+      const v = (e.clientX - lastX) / Math.max(1, now - lastT);
+      velocity = velocity * 0.6 + v * 0.4;
+      lastX = e.clientX; lastT = now;
+  
+      // rubber-band resistance past the first/last card
+      const pastStart = index === 0 && dx > 0;
+      const pastEnd   = index === slides.length - 1 && dx < 0;
+      dragX = (pastStart || pastEnd) ? dx * 0.3 : dx;
+      setX(base() + dragX, false);
+    });
+  
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      outer.classList.remove("is-dragging");
+      document.body.classList.remove("carousel-grabbing");
+      if (axis !== "x") return;
+  
+      if (performance.now() - lastT > 100) velocity = 0;
+      const threshold = step() * 0.2;
+      let target = index;
+      if (velocity < -0.35 || dragX < -threshold) target++;
+      else if (velocity > 0.35 || dragX > threshold) target--;
+      goTo(target);
+    }
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
+  
+    // don't open the link if the user was dragging
+    track.addEventListener("click", e => {
+      if (moved) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+    track.addEventListener("dragstart", e => e.preventDefault());
+  
+    // keyboard arrows
+    outer.tabIndex = 0;
+    outer.addEventListener("keydown", e => {
+      if (e.key === "ArrowRight") goTo(index + 1);
+      if (e.key === "ArrowLeft")  goTo(index - 1);
+    });
+  
+    window.addEventListener("resize", () => setX(base(), false));
+    goTo(0);
+  })();
+  </script>
+  <!-- Carousel: color-on-hover -->
+<script>
+  (function () {
+    // shades from darkest (image shadows) to lightest (image highlights)
+    const PALETTES = {
+      pink:  ["#5E1F4A", "#9C3F7E", "#D277B2", "#F2BCDD", "#FFF3FA"],
+      green: ["#1F4A0C", "#4C8A1A", "#86CC2E", "#C6F08A", "#F6FFE8"]
+    };
+    const DURATION_IN  = 1800;  // ms for color to flow through the whole gradient
+    const DURATION_OUT = 900;   // ms to fade back to grey
+    const SOFTNESS = 4;         // lower = softer edge where color meets grey
+    const CONTRAST = 1.4;       // higher = stronger light/dark difference in the gradient
+    const W = 1567, H = 879;
+    const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
+    const ease = t => 1 - Math.pow(1 - t, 3);
+  
+    document.querySelectorAll(".carousel-slide").forEach((slide, n) => {
+      const bgUrl = getComputedStyle(slide).getPropertyValue("--bg").trim()
+                      .replace(/^url\(["']?/, "").replace(/["']?\)$/, "");
+      const id = "tint" + n;
+      const stops = (PALETTES[slide.dataset.wash] || PALETTES.pink).map(hex);
+      const table = ch => stops.map(s => s[ch].toFixed(3)).join(" ");
+  
+      // colored copy of the background: same gradient, grey tones swapped for the card's shades,
+      // revealed by brightness so color flows from the lightest part into the darkest
+      slide.insertAdjacentHTML("afterbegin", `
+        <svg class="slide-tint" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
+          <filter id="${id}" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+            <feColorMatrix in="SourceGraphic" type="saturate" values="0" result="flat"/>
+            <feComponentTransfer in="flat" result="grey">
+              <feFuncR type="linear" slope="${CONTRAST}" intercept="${(1 - CONTRAST) / 2}"/>
+              <feFuncG type="linear" slope="${CONTRAST}" intercept="${(1 - CONTRAST) / 2}"/>
+              <feFuncB type="linear" slope="${CONTRAST}" intercept="${(1 - CONTRAST) / 2}"/>
+            </feComponentTransfer>
+            <feComponentTransfer in="grey" result="color">
+              <feFuncR type="table" tableValues="${table(0)}"/>
+              <feFuncG type="table" tableValues="${table(1)}"/>
+              <feFuncB type="table" tableValues="${table(2)}"/>
+            </feComponentTransfer>
+            <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" result="lum"/>
+            <feComponentTransfer in="lum" result="reveal">
+              <feFuncA type="linear" slope="${SOFTNESS}" intercept="-99"/>
+            </feComponentTransfer>
+            <feComposite in="color" in2="reveal" operator="in"/>
+          </filter>
+          <image href="${bgUrl}" width="${W}" height="${H}" preserveAspectRatio="xMidYMid slice" filter="url(#${id})"/>
+        </svg>`);
+  
+      const funcA = slide.querySelector(".slide-tint feFuncA");
+      let p = 0, target = 0, from = 0, start = 0, dur = 1, raf = null;
+  
+      // p = 0: all grey, p = 1: fully colored
+      function apply() {
+        const cut = 1.25 - p * 1.6;
+        funcA.setAttribute("intercept", (-SOFTNESS * cut).toFixed(3));
+      }
+      function tick(now) {
+        const t = Math.min(1, (now - start) / dur);
+        p = from + (target - from) * ease(t);
+        apply();
+        raf = t < 1 ? requestAnimationFrame(tick) : null;
+      }
+      function animateTo(v, ms) {
+        from = p; target = v; dur = ms * Math.abs(v - p); start = performance.now();
+        if (!raf) raf = requestAnimationFrame(tick);
+      }
+  
+      slide.addEventListener("mouseenter", () => animateTo(1, DURATION_IN));
+      slide.addEventListener("mouseleave", () => animateTo(0, DURATION_OUT));
+      apply();
+    });
+  })();
+  </script>
 <script>
   const revealElements = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
 
