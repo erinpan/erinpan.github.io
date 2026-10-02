@@ -261,7 +261,60 @@
       if (e.key === "ArrowRight") goTo(index + 1);
       if (e.key === "ArrowLeft")  goTo(index - 1);
     });
-  
+// trackpad two-finger swipe
+let wheelX = 0, wheelLocked = false, lockDir = 0, lastDx = 0;
+let settleTimer = null, unlockTimer = null;
+outer.addEventListener("wheel", e => {
+  let dx = e.deltaX, dy = e.deltaY;
+  if (e.deltaMode === 1) { dx *= 16; dy *= 16; }
+  if (Math.abs(dx) <= Math.abs(dy)) return;      // vertical swipe → let the page scroll
+  e.preventDefault();
+
+  const mag = Math.abs(dx);
+  const dir = dx > 0 ? 1 : -1;
+
+  // after a card change, ignore leftover glide — unless it's clearly a new swipe:
+  // reversing direction, or speeding up toward a card that exists
+  if (wheelLocked) {
+    const reversed = dir !== lockDir;
+    const speedingUp = mag > lastDx * 1.6 && mag > 6;
+    const hasCard = index + dir >= 0 && index + dir <= slides.length - 1;
+    lastDx = mag;
+    if (!(reversed || (speedingUp && hasCard))) {
+      clearTimeout(unlockTimer);
+      unlockTimer = setTimeout(() => { wheelLocked = false; }, 160);
+      return;
+    }
+    wheelLocked = false;
+    clearTimeout(unlockTimer);
+  }
+  lastDx = mag;
+
+  // follow the fingers; past the first/last card, only a small capped stretch
+  wheelX -= dx;
+  const pastStart = index === 0 && wheelX > 0;
+  const pastEnd   = index === slides.length - 1 && wheelX < 0;
+  const offset = (pastStart || pastEnd)
+    ? Math.sign(wheelX) * Math.min(40, Math.abs(wheelX) * 0.2)
+    : wheelX;
+  setX(base() + offset, false);
+
+  // swiped far enough → move one card
+  if (Math.abs(wheelX) > step() * 0.15 && !pastStart && !pastEnd) {
+    const move = wheelX < 0 ? 1 : -1;
+    wheelX = 0;
+    clearTimeout(settleTimer);
+    goTo(index + move);
+    wheelLocked = true;
+    lockDir = move;
+    unlockTimer = setTimeout(() => { wheelLocked = false; }, 160);
+    return;
+  }
+
+  // fingers stopped short (or pushed past an end) → spring back
+  clearTimeout(settleTimer);
+  settleTimer = setTimeout(() => { wheelX = 0; goTo(index); }, 140);
+}, { passive: false });
     window.addEventListener("resize", () => setX(base(), false));
     goTo(0);
   })();
